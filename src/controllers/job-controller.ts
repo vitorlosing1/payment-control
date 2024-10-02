@@ -37,4 +37,13 @@ export class JobController {
         .json({ message: "Failed to fetch jobs by contract", error });
     }
   }
+
+  public async createJob(req: Request, res: Response): Promise<Response> {
+    try {
+      const job = await this.jobService.createJob(req.body);
+      return res.status(201).json(job);
+    } catch (error) {
+      return res.status(500).json({ message: "Failed to create job", error });
+    }
+  }
 }
